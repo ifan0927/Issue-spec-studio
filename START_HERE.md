@@ -11,6 +11,20 @@ A design session runs in the target project's repository. Begin with that reposi
 
 The Studio repository supplies the method and templates. It is not a workspace for target projects.
 
+```text
+Target project
+    |
+    v
+Root AGENTS.md detects request intent
+    |
+    +-- Design request --> load Project Profile, Studio methodology,
+    |                     relevant project authorities, and active checkpoint if present
+    `-- Implementation request --> load the implementation-ready issue
+                                  and relevant project authorities
+```
+
+The canonical project-owned artifact locations are `.issue-spec/project-profile.md` and `.issue-spec/active.md`. The Profile is durable. The checkpoint is optional and temporary. An override is valid only when an established repository convention requires it and the target project's root `AGENTS.md` declares it explicitly. Without an override, use the canonical paths; never search for alternatives or reconstruct a missing checkpoint from conversation history, Git history, or assumptions.
+
 ## Basic design loop
 
 1. Confirm the target project and current design objective.
@@ -20,6 +34,8 @@ The Studio repository supplies the method and templates. It is not a workspace f
 5. Create an active checkpoint only if the discussion must be resumed later; keep it minimal and compact it at every phase boundary.
 6. Produce a candidate Markdown issue and run the coding-ready review.
 7. Freeze the output after human approval, publish it to the project's existing issue authority, and remove completed state from the active checkpoint.
+
+For implementation intent, do not automatically load Studio or create a checkpoint. Read the implementation-ready issue and relevant project authorities. Return to design routing only when implementation reveals a genuine unresolved design blocker.
 
 ## Methodology routing
 

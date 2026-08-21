@@ -1,12 +1,14 @@
-# Target Repository Router Pattern
+# Target Repository Router Template
 
-> Adapt this semantic pattern to the target repository's existing root `AGENTS.md`. Do not overwrite established instructions or assume universal paths. Replace every placeholder with the repository's actual authority.
+> Reusable Studio template, not a live router. Adapt this semantic pattern in the target repository's root `AGENTS.md` without replacing established instructions. The canonical artifact paths are `.issue-spec/project-profile.md` and `.issue-spec/active.md`.
 
 ## Request routing
 
-- For implementation, bug-fix, test, review, or delivery requests, follow `<existing implementation instructions>` and load only the authoritative engineering documents triggered by the task.
-- For design, specification, decomposition, or ambiguity-resolution requests, use `<Issue Spec Studio/START_HERE.md>` and the project-owned Profile at `<actual Project Profile path>`.
-- Load `<actual active checkpoint path>` only when it exists for the same unfinished design objective. Do not create a checkpoint unless later resumption is necessary.
+- For implementation, bug-fix, test, review, or delivery requests with an implementation-ready issue, follow `<existing implementation instructions>`, read the issue, and load only the authoritative engineering documents triggered by the task. Do not automatically invoke Studio or create a checkpoint.
+- For unclear requirements, undecided product behavior, architectural choices, cross-cutting decomposition, competing approaches, blockers, unverified assumptions, issue creation, or substantive redesign, use `<Issue Spec Studio/START_HERE.md>` and `.issue-spec/project-profile.md`.
+- For design, load only relevant project authorities and then `.issue-spec/active.md` if it exists for the same unfinished objective.
+- If `.issue-spec/active.md` is missing, there is no active checkpoint. Do not reconstruct one from conversations, Git history, or assumptions.
+- Override either canonical path only when an established repository convention requires it; declare the exact override here and never search heuristically for alternatives.
 
 ## Authority
 
@@ -20,3 +22,4 @@
 - Keep a checkpoint limited to objective, confirmed decisions, active assumptions, blocking questions, current decomposition, and next focus.
 - Compact at phase boundaries.
 - Remove completed or published design state from the checkpoint.
+- Remove the checkpoint when no unresolved resumable state remains.

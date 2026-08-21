@@ -9,6 +9,45 @@ A design session takes place in the target repository, not in a Studio-owned pro
 
 The router should remain thin. It points to authorities; it does not copy them.
 
+```text
+Target project
+    |
+    v
+Root AGENTS.md detects request intent
+    |
+    +-- Design request --> load .issue-spec/project-profile.md,
+    |                     Studio methodology, relevant project authorities,
+    |                     and .issue-spec/active.md if present
+    `-- Implementation request --> load the implementation-ready issue
+                                  and relevant project authorities
+```
+
+Studio never requires a user to enter this repository, select or register a target project, or create Studio-owned project state.
+
+## Intent routing
+
+### Design intent
+
+Use Studio when requirements are unclear or incomplete; product behavior remains undecided; architectural choices, cross-cutting decomposition, competing approaches, blocking questions, or unverified assumptions remain; an implementation-ready issue must be created; or existing work is being substantively redesigned.
+
+Load, in order:
+
+1. The target root `AGENTS.md`.
+2. `.issue-spec/project-profile.md`, or its explicitly declared override.
+3. Only the relevant project authority documents.
+4. Studio's bootstrap and only the methodology references triggered by the request.
+5. `.issue-spec/active.md`, or its explicitly declared override, only if it exists.
+
+### Implementation intent
+
+Use the project's normal implementation workflow when an implementation-ready issue exists, scope and acceptance criteria are established, and the user or project workflow has initiated implementation.
+
+- Read the selected issue and relevant project authorities.
+- Do not automatically invoke Studio.
+- Do not create `active.md` merely because implementation started.
+- Do not rewrite an existing implementation-ready issue into a Studio template.
+- Enter design routing only when a genuine unresolved design blocker appears.
+
 ## Roles
 
 ### Human
@@ -94,6 +133,8 @@ There is no Studio workflow database or permanent project workspace.
 - An approved issue is frozen until publication.
 - After publication, the project-native authority owns content and status.
 - Published or completed design state leaves the checkpoint instead of accumulating.
+
+The canonical Profile and checkpoint paths are defined in [Canonical Information Model](information-model.md). Path overrides require an established repository convention and an explicit declaration in the target root `AGENTS.md`; agents do not discover alternatives heuristically.
 
 ## Approval points
 

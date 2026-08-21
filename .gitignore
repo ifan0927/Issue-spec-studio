@@ -1,7 +1,3 @@
-# Local working artifacts are intentionally non-canonical.
-work/*
-!work/README.md
-
 # Common local editor and OS files.
 .DS_Store
 *.swp

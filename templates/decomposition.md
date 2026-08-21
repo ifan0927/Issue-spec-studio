@@ -1,6 +1,6 @@
-# Temporary Design Decomposition: <bounded goal>
+# Temporary Design Decomposition Template: <bounded goal>
 
-> Optional, target-project-owned, and working-only. Use this file only when the active checkpoint cannot express a large request clearly. It is not the project roadmap. Publish approved outcomes into the project's existing issue and roadmap authorities, then compact or remove this file.
+> Reusable Studio template, not live project state. If needed, copy it into a target-project-owned temporary location declared by that project's routing and remove the word `Template` from the copied heading. Use it only when the active checkpoint cannot express a large request clearly. It is not the project roadmap. Publish approved outcomes into the project's existing issue and roadmap authorities, then compact or remove this file.
 
 ## Goal
 

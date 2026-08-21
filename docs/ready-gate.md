@@ -47,6 +47,7 @@ An issue is not coding-ready if any condition holds:
 ### Project consistency and routing
 
 - [ ] The design session ran in the target repository.
+- [ ] The canonical `.issue-spec/` paths were used, or the target root `AGENTS.md` explicitly declares every convention-driven override.
 - [ ] Relevant Project Profile references were loaded.
 - [ ] The issue does not override or copy project governance.
 - [ ] Repository evidence supports the plan, or a prerequisite issue creates the necessary foundation.
@@ -74,6 +75,7 @@ An issue is not coding-ready if any condition holds:
 - [ ] References are directly relevant and point to project-native authorities.
 - [ ] The issue is clean and independently readable Markdown.
 - [ ] The active checkpoint can now be compacted or removed.
+- [ ] A missing `.issue-spec/active.md` has not been reconstructed from history or assumptions.
 
 ## Approval and freeze
 

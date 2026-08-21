@@ -8,7 +8,7 @@ The current discussion AI or a human may publish it to Linear, GitHub, or anothe
 
 ## Issue and roadmap authorities
 
-Each target project identifies its existing issue and roadmap authorities in the Project Profile.
+Each target project identifies its existing issue and roadmap authorities in `.issue-spec/project-profile.md`, or in the Profile path explicitly overridden by the target root `AGENTS.md`.
 
 - The issue authority owns published issue IDs, content, status, priority, assignment, and execution progress.
 - The roadmap authority owns durable goals, sequencing, milestones, schedule, and roadmap status.

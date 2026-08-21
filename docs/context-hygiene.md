@@ -14,7 +14,7 @@ Always available and intentionally thin. It distinguishes implementation from de
 
 ### L1 — Project Profile
 
-Loaded for a design session. It records stable facts and maps topics to canonical sources with load triggers.
+Loaded for a design session from `.issue-spec/project-profile.md`, unless the target root `AGENTS.md` explicitly declares an override. It records stable facts and maps topics to canonical sources with load triggers.
 
 ### L2 — Task-relevant governance
 
@@ -47,10 +47,14 @@ Point to the closest authoritative source instead of copying it. Keep leaf docum
 - Redirect chains retained only to preserve obsolete paths.
 - A final issue that references an active checkpoint, scratch note, or validation report.
 - Project-specific working state stored in the Studio repository.
+- Heuristic searches for an alternative Profile or checkpoint.
+- Reconstructing a missing checkpoint from conversations, Git history, or assumptions.
 
 ## Active checkpoint
 
-An active checkpoint is optional. Create it only to preserve the minimum recoverable state of an unfinished discussion:
+The canonical path is `.issue-spec/active.md`. It is optional; if it does not exist and the root router declares no override, there is no active design checkpoint.
+
+Create it only to preserve the minimum recoverable state of an unfinished discussion:
 
 - Current objective.
 - Confirmed decisions.
@@ -68,6 +72,35 @@ It must not become:
 - A permanent decision archive.
 - A duplicate project dashboard.
 - A mirror of published issues or the project roadmap.
+- A duplicate Project Profile or general notes file.
+
+## Active-checkpoint lifecycle
+
+### Create
+
+Create `.issue-spec/active.md` only when genuine unresolved design work cannot be completed in the current session and important decisions, assumptions, questions, or decomposition must survive. Do not create it for every issue or any routine implementation task.
+
+### Update
+
+Update it when a confirmed decision, relevant assumption, blocking question, material decomposition, or next focus changes. Rewrite and compact the effective state instead of appending history.
+
+### Complete
+
+When design becomes implementation-ready:
+
+1. Move durable architectural decisions to the appropriate project authority through its normal approval process.
+2. Publish implementation work to the project's existing issue system.
+3. Remove resolved assumptions and questions.
+4. Ensure nothing important exists only in the checkpoint.
+5. Remove `.issue-spec/active.md` when no resumable design state remains.
+
+### Archive
+
+Do not archive checkpoints by default. A target project may archive one only when it has an explicit, justified retention requirement. The archive must follow project retention rules and must not become a transcript collection or rejected-ideas repository.
+
+### Multiple concurrent design efforts
+
+The default is one active checkpoint per project. A target project may define a bounded `.issue-spec/active/` extension only when multiple design efforts are genuinely concurrent and its root `AGENTS.md` defines an explicit selection mechanism. Studio never coordinates or stores them.
 
 ## Compaction rules
 
@@ -97,11 +130,15 @@ It must not become:
 
 Version control, published issues, decision records, and project authorities provide history. The active checkpoint does not.
 
-## Workspace rule
+## Location resolution
 
-Target-project checkpoints live in the target project at a path chosen after inspecting its conventions. They may be tracked or ignored according to that project's collaboration and retention needs.
+1. Use `.issue-spec/project-profile.md` and `.issue-spec/active.md`.
+2. Override either path only when an established target-repository convention requires it.
+3. Declare the exact override in the target root `AGENTS.md`.
+4. Never search heuristically for alternative locations.
+5. When no override is declared, the canonical path applies.
 
-The Studio repository's `work/` directory is only disposable scratch space for maintaining the Studio methodology. It never contains target-project Profiles, checkpoints, decompositions, issue drafts, or roadmap copies.
+The Studio repository stores no live target-project artifact. Use an external temporary directory for disposable Studio maintenance state.
 
 ## Deterministic maintenance checks
 

@@ -1,5 +1,7 @@
 <!-- issue-spec: v1 -->
 
+> Stateless fictional example. It demonstrates the compact issue contract and does not describe active project work.
+
 # Remove the duplicate login error message
 
 ## Goal

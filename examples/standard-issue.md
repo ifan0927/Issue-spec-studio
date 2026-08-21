@@ -1,5 +1,7 @@
 <!-- issue-spec: v1 -->
 
+> Stateless fictional example. It demonstrates the standard issue contract and does not describe active project work.
+
 # Add an administrative user-suspension API
 
 ## Goal

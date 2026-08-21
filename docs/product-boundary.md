@@ -2,7 +2,7 @@
 
 ## Product statement
 
-Issue Spec Studio is a reusable design methodology and context-routing system. It turns natural-language intent, approved project context, and current repository evidence into a standard Markdown issue that a coding agent or developer can execute.
+Issue Spec Studio is a reusable design methodology and artifact-contract repository. It turns natural-language intent, approved project context, and current repository evidence into a standard Markdown issue that a coding agent or developer can execute.
 
 Studio owns the method up to the coding-ready decision. It does not own a long-lived workspace for any target project and does not control execution after publication.
 
@@ -21,6 +21,8 @@ The design does not add complexity for unproven multi-user, enterprise-governanc
 - Compact and standard authoring depths and risk overlays.
 - Semantic review and the coding-ready gate.
 - Consumer-neutral Markdown output conventions.
+- Stateless, explicitly labeled examples that clarify the method.
+- Prospective adoption and migration guidance.
 
 ## The target project owns
 
@@ -29,6 +31,7 @@ The design does not add complexity for unproven multi-user, enterprise-governanc
 - Its Project Profile and any resumable active checkpoint.
 - Repository evidence and project-specific decisions.
 - Its existing issue, roadmap, planning, and execution authorities.
+- Every project-specific design decision and all resumable design state.
 
 ## In scope
 
@@ -44,6 +47,9 @@ The design does not add complexity for unproven multi-user, enterprise-governanc
 ## Out of scope
 
 - Owning permanent per-project workspaces or current project state.
+- Storing live Project Profile instances or active checkpoints.
+- Acting as a project registry, selected-project workspace, multi-project manager, or dashboard.
+- Acting as a planning authority, roadmap mirror, issue tracker, or transcript archive.
 - Receiving, scheduling, or running coding agents.
 - Managing worktrees, branches, commits, pull requests, CI, merges, or cleanup.
 - Tracking ALC or other executor runtime state.
@@ -68,3 +74,4 @@ The core model does not depend on ChatGPT, Codex, Linear, GitHub, ALC, or spec-k
 - A new discussion can resume from a clean project-owned checkpoint.
 - Project context loads through references instead of repeated full-repository scans.
 - Published issues, roadmaps, and execution status exist only in their project-native authorities.
+- The Studio repository remains stateless with respect to every target project.

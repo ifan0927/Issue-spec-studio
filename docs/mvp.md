@@ -17,6 +17,8 @@ The MVP is a documentation-first, local-first methodology package:
 
 Project instances of Profiles, checkpoints, and design sessions live in target repositories. The Studio repository contains only reusable material.
 
+The canonical target-project locations are `.issue-spec/project-profile.md` and the optional `.issue-spec/active.md`. An established repository convention may require an override, but the target root `AGENTS.md` must declare it explicitly. Agents do not search for an alternative or reconstruct a missing checkpoint.
+
 ## MVP does not include
 
 - A product CLI, database, service, TUI, or web UI.
@@ -73,6 +75,7 @@ Confirm that a new discussion can resume from a minimal project-owned checkpoint
 - The final issue is clean, independently readable Markdown.
 - Published issues, roadmaps, and execution state remain solely in target-project authorities.
 - The Studio repository contains no long-lived per-project workspace.
+- The Studio repository contains no live Project Profile, active checkpoint, registry, issue mirror, or roadmap mirror.
 
 ## Deferred evolution
 

@@ -12,6 +12,8 @@ The repository has not entered product implementation. It has no production CLI,
 - Design sessions run in target repositories.
 - A target repository's thin root `AGENTS.md` routes implementation intent to project instructions and design intent to Studio.
 - The target repository owns its governance, Project Profile, and any temporary active checkpoint.
+- `.issue-spec/project-profile.md` is the canonical default Profile location; `.issue-spec/active.md` is the canonical default checkpoint location.
+- A path override is valid only when required by established repository conventions and declared in the target root `AGENTS.md`.
 - Markdown is the canonical human-readable issue output.
 - The Profile maps stable facts and authoritative references without copying their contents.
 - An active checkpoint preserves only unresolved state needed to resume one unfinished design discussion.
@@ -23,7 +25,7 @@ The repository has not entered product implementation. It has no production CLI,
 
 Continue with design validation before building a complete tool:
 
-1. Apply the router and Profile templates to a real target repository using its existing layout.
+1. Apply the router and Profile templates to a real target repository using the canonical `.issue-spec/` locations or an explicitly declared convention-driven override.
 2. Walk through a compact change, standard feature, large-request decomposition, and high-risk change.
 3. Test whether a new discussion can resume from only the minimal active checkpoint.
 4. Confirm that publication and cleanup leave no issue or roadmap mirror behind.
@@ -38,6 +40,7 @@ Continue with design validation before building a complete tool:
 - Do not add a framework for hypothetical edge cases.
 - Do not bring the ALC execution lifecycle into the product.
 - Do not let the root router or Project Profile become a copied knowledge base.
+- Do not reintroduce a Studio-owned scratch workspace, project registry, or live artifact store.
 
 ## Pending validation
 

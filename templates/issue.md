@@ -1,5 +1,7 @@
 <!-- issue-spec: v1 -->
 
+> Reusable Studio issue template. This file is not a live target-project issue.
+
 # <Issue title>
 
 ## Goal

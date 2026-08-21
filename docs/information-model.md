@@ -5,17 +5,17 @@
 Studio defines a small set of Markdown contracts connected by references. It does not maintain a parallel human/machine schema and does not host project instances of those artifacts.
 
 ```text
-Studio methodology and templates
+Studio methodology, contracts, templates, and stateless examples
               |
               | applied inside
               v
 Target repository root router (AGENTS.md)
        | implementation intent         | design intent
        v                               v
-Project engineering authority     Project Profile
-                                          |
+Ready issue and project           .issue-spec/project-profile.md
+engineering authorities                    |
                                           v
-                         optional active checkpoint
+                         optional .issue-spec/active.md
                                           |
                                           v
                               approved Markdown issue
@@ -40,25 +40,50 @@ Arrows mean navigation or constraint, never content replication.
 | Issue authority | Target project's existing system | Published issue content, ID, status, priority, assignment, and progress | Studio-internal working state |
 | Roadmap authority | Target project's existing system | Durable priorities, sequencing, milestones, and roadmap status | A duplicate Studio roadmap |
 
-## Required semantics and optional paths
+The non-overlapping authority map is:
 
-The responsibilities above are required. Their paths are not universal.
+| Concern | Authority |
+|---|---|
+| Studio methodology | Issue Spec Studio repository |
+| Project routing | Target project root `AGENTS.md` |
+| Stable project context | `.issue-spec/project-profile.md` or its explicitly declared override |
+| Architecture | Target project's architecture authority |
+| Temporary design state | `.issue-spec/active.md` or its explicitly declared override |
+| Published implementation work | Target project's existing issue system |
+| Roadmap | Target project's existing planning authority |
+| Runtime and implementation behavior | Target project's code and technical authorities |
 
-After examining an existing repository's conventions, a project may choose locations such as:
+## Canonical target-project locations
+
+An adopting target repository uses:
 
 ```text
-AGENTS.md
-docs/project-profile.md
-work/design/active.md
+<project-root>/
+|-- AGENTS.md
+`-- .issue-spec/
+    |-- project-profile.md
+    `-- active.md
 ```
 
-These are recommendations, not required directories. A repository may place the Profile beside existing governance, keep a local-only checkpoint in an ignored directory, or use another established convention. References and router instructions must use the actual chosen paths.
+`.issue-spec/project-profile.md` is durable, project-owned stable context and a set of authority pointers. `.issue-spec/active.md` is temporary, project-owned resumable state for unresolved design work. `active.md` is optional; it must not exist permanently when no design work needs to resume.
+
+Location resolution is deterministic:
+
+1. Use `.issue-spec/project-profile.md` and `.issue-spec/active.md` by default.
+2. Override either path only when an established repository convention requires it.
+3. Declare every override explicitly in the target project's root `AGENTS.md`.
+4. Never search the repository heuristically for an alternative Profile or checkpoint.
+5. When no override is declared, use the canonical `.issue-spec/` path.
+6. When `.issue-spec/active.md` does not exist, there is no active design checkpoint.
+7. Never reconstruct a missing checkpoint from old conversations, Git history, or assumptions.
 
 ## Artifact responsibilities
 
 ### Project Profile
 
-The Project Profile records stable project identity, durable facts that are not already better owned elsewhere, and pointers with load triggers to canonical sources. It may point to commands or planning authorities but must not copy their contents.
+The Project Profile records stable project identity, durable facts that are not already better owned elsewhere, and pointers with load triggers to canonical sources. It may contain project purpose and boundaries, stable architectural constraints, repository-wide invariants, development workflow, authority mappings, links to architecture and planning authorities, subsystem instruction locations, and stable terminology.
+
+It may point to commands or planning authorities but must not copy their contents. It must not contain live implementation status, open-issue copies, a roadmap mirror, session history, active design questions, temporary assumptions, transcripts, or duplicated detailed architecture documents.
 
 ### Active checkpoint
 
@@ -71,7 +96,9 @@ The active checkpoint exists only when an unfinished discussion must survive a c
 - Current decomposition.
 - Next discussion focus.
 
-It is working-only, continuously rewritten, and removed when no unresolved resumable state remains.
+It is working-only, continuously rewritten, and removed when no unresolved resumable state remains. It is not a transcript, activity log, brainstorm archive, rejected-alternative collection, permanent decision archive, dashboard, implementation tracker, issue copy, roadmap mirror, duplicate Profile, or general notes file.
+
+The default is one active checkpoint per project. A target project may define a bounded `.issue-spec/active/` extension only for genuinely concurrent design efforts and only when its root router declares an explicit selection mechanism. Studio never selects, coordinates, or stores those checkpoints.
 
 ### Candidate and approved issues
 
@@ -107,6 +134,8 @@ One fact has one canonical owner. Other artifacts use references or a task-speci
 - An issue-specific decision belongs in the issue.
 - An unapproved or unresolved decision remains only in the active checkpoint.
 - A durable priority or sequence belongs in the existing roadmap authority, not Studio.
+
+Changes to the product boundary, canonical information model, authority hierarchy, or coding-ready gate require human approval before they become Studio methodology.
 
 An issue cannot downgrade project policy into an issue-level exception.
 
