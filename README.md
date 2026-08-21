@@ -1,27 +1,26 @@
 # Issue Spec Studio
 
-Issue Spec Studio 是一個 local-first、consumer-neutral 的規格工作區，用來把自然語言需求討論轉換成穩定、標準化、可執行的 coding-ready Issue。
+Issue Spec Studio is a reusable, local-first design methodology and context-routing system. It turns a natural-language design discussion into a clear, coding-ready Markdown issue without becoming the home of a target project's ongoing state.
 
-本 repository 目前保存已確認的產品與流程設計基線，供後續本地 Codex 接手。它不是 ALC 的子系統，也尚未進入程式實作階段。
+This repository owns the methodology, templates, operating guidance, and artifact contracts. A design session runs inside the target project's repository, where project-specific context and any unfinished design checkpoint remain under that project's authority.
 
-## 核心輸出
+## What Studio provides
 
-- 經人工批准的 Project Profile
-- 有邊界的 milestone roadmap
-- 單一、標準 Markdown coding Issue
+- A thin `AGENTS.md` routing pattern that distinguishes design work from implementation work.
+- A Project Profile contract for stable project facts and pointers to authoritative sources.
+- A minimal active-checkpoint contract for unfinished design discussions.
+- Compact and standard issue-authoring guidance, risk overlays, decomposition rules, and a coding-ready gate.
+- Consumer-neutral Markdown templates and examples.
 
-## 核心原則
+## Authority boundaries
 
-- 專案治理高於 Issue；Issue 不得覆寫 repo 規則。
-- Discussion AI 負責需求分析、釐清、拆分、規劃與語意檢查。
-- Coding agent 不承擔高階策略決策，只在明確授權範圍內決定實作細節。
-- Context 依 reference 按需載入，不預先展開整個 project。
-- Linear、GitHub、repo 與下游系統各自保有其權威資料，不在 Studio 建立鏡像狀態。
-- 小任務走低摩擦 compact path；高風險要求以 overlay 增加必要證據。
+- The target repository owns project governance, the Project Profile, and any temporary active checkpoint.
+- The target project's existing issue and roadmap system owns published work, status, priority, scheduling, and execution progress.
+- Studio never mirrors issues, roadmaps, conversations, or current project state.
+- Project governance outranks issue-level instructions; a design issue cannot override repository rules.
 
-## 從哪裡開始
+## Start here
 
-Agent 與維護者都先閱讀 [START_HERE.md](START_HERE.md)。該文件是最小 bootstrap，會依任務引導至必要 reference。
+Agents and maintainers should begin with [START_HERE.md](START_HERE.md). It is a small router to the relevant methodology reference rather than a request to load the entire repository.
 
-目前設計成熟度與下一步見 [HANDOFF.md](HANDOFF.md)。
-
+See [HANDOFF.md](HANDOFF.md) for the current maturity and next validation work.

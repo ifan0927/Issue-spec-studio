@@ -2,77 +2,81 @@
 
 ## Gate result
 
-Discussion AI 在 human approval 前輸出以下其中一種結論：
+Before human approval, the discussion AI returns one result:
 
-- `BLOCKED`：存在必須先解決的缺漏或衝突。
-- `READY WITH ADVISORIES`：可執行，但 human 應知悉非阻塞風險。
-- `READY`：沒有已知阻塞問題。
+- `BLOCKED`: A gap or conflict must be resolved first.
+- `READY WITH ADVISORIES`: Execution is possible, with non-blocking risk the human should understand.
+- `READY`: No known blocker remains.
 
-這份 review 結果是批准前資訊，不放入最終 Issue。
+The review result is approval input, not part of the final issue or a permanent artifact.
 
 ## Blocking conditions
 
-出現任一項即不得 coding-ready：
+An issue is not coding-ready if any condition holds:
 
-- Goal 仍可能代表不同 outcome。
-- Scope 或 out of scope 會導致實作邊界不明。
-- 存在尚未回答、會改變策略或驗收的問題。
-- Issue 與 target repo governance 衝突。
-- 依賴尚未完成或沒有明確處置方式。
-- Coding agent 仍需選擇高階策略。
-- Requirement 沒有可驗收 AC 或 verification。
-- Verification 無法在預期環境執行或取得證據。
-- Issue 同時包含多個無法以單一 PR／驗證單元交付的 outcomes。
-- Migration、compatibility、安全、部署或 rollback 風險未處理。
-- Issue 依賴未驗證且會影響可行性的 assumption。
+- The Goal could represent different outcomes.
+- Scope or out-of-scope boundaries are unclear.
+- An unanswered question can change strategy or acceptance.
+- The issue conflicts with target-repository governance.
+- A dependency is unavailable without an explicit treatment.
+- The coding agent must still choose a high-level strategy.
+- A requirement lacks acceptance or verification evidence.
+- Verification cannot run or produce evidence in the expected environment.
+- The issue contains multiple outcomes that cannot be delivered as one reviewable and verifiable unit.
+- Migration, compatibility, security, deployment, or rollback risk is untreated.
+- Feasibility depends on an unverified assumption.
+- The issue depends on an active checkpoint or another working-only artifact.
 
 ## Ready checklist
 
 ### Intent and boundary
 
-- [ ] Goal 描述單一、具體 outcome。
-- [ ] Scope 明確列出需要改變的範圍。
-- [ ] 必要時明示 out of scope。
-- [ ] Issue 大小適合一次獨立實作、review 與 verification。
+- [ ] Goal describes one specific, observable outcome.
+- [ ] Scope states what changes.
+- [ ] Out of scope is explicit where needed.
+- [ ] The issue fits one independently reviewable and verifiable delivery unit.
 
 ### Decisions and plan
 
-- [ ] 所有高影響問題已解決。
-- [ ] Confirmed decisions 已進入 Issue。
-- [ ] Implementation Plan 指定策略、boundaries 與順序。
-- [ ] Agent discretion 不會改變需求、安全或相容性。
-- [ ] Coding agent 無需重新做產品或 architecture planning。
+- [ ] All high-impact questions are resolved.
+- [ ] Confirmed issue-specific decisions appear in the issue.
+- [ ] The Implementation Plan identifies strategy, boundaries, integration points, and order.
+- [ ] Agent discretion cannot change requirements, safety, compatibility, or acceptance.
+- [ ] The coding agent does not need to repeat product or architecture planning.
 
-### Project consistency
+### Project consistency and routing
 
-- [ ] 已載入與任務相關的 Project Profile refs。
-- [ ] Issue 沒有覆寫 project governance。
-- [ ] Issue 沒有大量複製 repo 規則。
-- [ ] Repo 現況足以支持計畫，或前置 Issue 已明確建立必要基礎。
+- [ ] The design session ran in the target repository.
+- [ ] Relevant Project Profile references were loaded.
+- [ ] The issue does not override or copy project governance.
+- [ ] Repository evidence supports the plan, or a prerequisite issue creates the necessary foundation.
+- [ ] Publication targets the project's existing issue authority.
+- [ ] No issue or roadmap status is mirrored in Studio or the checkpoint.
 
 ### Acceptance and evidence
 
-- [ ] 每項重要 requirement 均可驗收。
-- [ ] AC 描述 observable outcome，不只是重述需求。
-- [ ] Verification 說明如何取得證據。
-- [ ] 必要的 test、lint、build 或人工檢查範圍清楚。
-- [ ] Issue-specific DoD delta 已列出；沒有重複 project-wide DoD。
+- [ ] Every important requirement is verifiable.
+- [ ] Acceptance Criteria describe observable outcomes.
+- [ ] Verification explains how to obtain evidence.
+- [ ] Required test, lint, build, or manual checks are clear.
+- [ ] Any issue-specific Definition of Done delta is explicit without repeating project-wide policy.
 
 ### Risk
 
-- [ ] 已辨識適用的 risk overlays。
-- [ ] 需要時包含 compatibility、migration、rollback、security、deployment 或 observability 證據。
-- [ ] 高風險工作已拆分成可以安全停止與驗證的步驟。
+- [ ] Applicable risk overlays are identified.
+- [ ] Compatibility, migration, rollback, security, deployment, and observability evidence is included when needed.
+- [ ] High-risk work is split into safely stoppable and verifiable steps.
 
 ### Final hygiene
 
-- [ ] 沒有 open questions、TBD、TODO 或未處理 placeholder。
-- [ ] 沒有 brainstorm transcript、被否決方案或 validation report。
-- [ ] References 都與本 Issue 直接相關。
-- [ ] Markdown 結構乾淨且可獨立閱讀。
+- [ ] No open questions, `TBD`, `TODO`, or unresolved placeholders remain.
+- [ ] No transcript, rejected alternatives, brainstorm archive, or validation report remains.
+- [ ] References are directly relevant and point to project-native authorities.
+- [ ] The issue is clean and independently readable Markdown.
+- [ ] The active checkpoint can now be compacted or removed.
 
 ## Approval and freeze
 
-Human approval 代表同意 Goal、Scope、重要 decisions、Issue split、Implementation Plan、AC 與 Verification。
+Human approval covers the Goal, Scope, major decisions, issue split, Implementation Plan, Acceptance Criteria, and Verification.
 
-Approval 後的 Issue 應視為 frozen output。發布前若發現實質語意變更，必須重新取得 approval；發布後則建立新的或 superseding Issue，不在 Studio 靜默改寫。
+After approval, treat the issue as frozen. A substantive semantic change before publication requires renewed approval. After publication, follow the project's existing issue-revision policy rather than silently changing a Studio draft.

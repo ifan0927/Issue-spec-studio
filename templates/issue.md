@@ -4,11 +4,11 @@
 
 ## Goal
 
-<單一、具體、可觀察的 outcome。>
+<One specific, observable outcome.>
 
 ## Context
 
-<只保留 coding agent 執行時真正需要的背景；compact task 可省略。>
+<Only the context required for implementation. Omit for a compact task.>
 
 ## Scope
 
@@ -16,40 +16,40 @@
 
 ## Out of scope
 
-- <必要時使用；不可用來覆寫 project governance。>
+- <Use when needed. Never use this section to override project governance.>
 
 ## Requirements
 
-- <Standard task 使用；compact task 可將必要內容直接整合到 Scope 與 AC。>
+- <Use for a standard task. A compact task may express necessary behavior in Scope and Acceptance Criteria.>
 
 ## Applicable project references
 
-- <只列與本任務直接相關的 canonical refs，不複製其內容。>
+- <List only directly relevant canonical target-project sources. Do not reference a checkpoint or copy source contents.>
 
 ## Implementation Plan
 
-1. <已決定的策略、boundary、integration point 或順序。>
+1. <State the decided strategy, boundary, integration point, or order.>
 
 ## Agent discretion
 
-- <Coding agent 可自行決定且不影響需求、策略、安全、相容性或驗收的細節。>
+- <State choices that cannot change requirements, strategy, safety, compatibility, or acceptance.>
 
 ## Acceptance Criteria
 
-- [ ] <可觀察、可判定的完成條件。>
+- [ ] <An observable, decidable completion condition.>
 
 ## Verification
 
-- <測試、命令、環境、人工檢查或其他 evidence。>
+- <Tests, commands, environment, manual checks, or other evidence.>
 
 ## Risks and safeguards
 
-<只在適用時加入 migration、compatibility、security、deployment、rollback 或 observability 要求。>
+<Add migration, compatibility, security, deployment, rollback, or observability requirements only when applicable.>
 
 ## Issue-specific Definition of Done
 
-<只列 project-wide DoD 之外的本任務 delta；沒有則省略。>
+<List only deltas from the project-wide Definition of Done. Omit if none.>
 
 ## Execution fallback
 
-若已指定的 implementation strategy 在實際 repo state 下不可行，停止並提供證據，回報 spec defect；不要自行改變高階策略或 scope。
+If the specified implementation strategy is infeasible in the current repository, stop, provide evidence, and report a specification defect. Do not silently change the high-level strategy or scope.

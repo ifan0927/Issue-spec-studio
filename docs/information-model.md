@@ -2,140 +2,128 @@
 
 ## Model shape
 
-Studio 不使用單一巨型 schema，也不維護兩份平行的 human／machine representation。它由少量具有清楚 ownership 的 Markdown artifacts 組成，透過 references 連接。
+Studio defines a small set of Markdown contracts connected by references. It does not maintain a parallel human/machine schema and does not host project instances of those artifacts.
 
 ```text
-Target repo governance
-        ↓ indexed by
-Approved Project Profile
-        ↓ constrains
-Bounded Roadmap
-        ↓ decomposes into
-Active Issue discussion
-        ↓ produces
-Approved Markdown Issue
-        ↓ published to
-Linear / GitHub / other consumer
+Studio methodology and templates
+              |
+              | applied inside
+              v
+Target repository root router (AGENTS.md)
+       | implementation intent         | design intent
+       v                               v
+Project engineering authority     Project Profile
+                                          |
+                                          v
+                         optional active checkpoint
+                                          |
+                                          v
+                              approved Markdown issue
+                                          |
+                                          v
+                         project issue / roadmap authority
 ```
 
-箭頭代表 navigation 或 constraint，不代表複製內容。
+Arrows mean navigation or constraint, never content replication.
+
+## Authority and responsibility
+
+| Artifact or system | Owner | Responsibility | Must not contain |
+|---|---|---|---|
+| Studio methodology | Studio repository | Reusable method, templates, guidance, and contracts | Target-project current state |
+| Project governance | Target repository | Coding, architecture, testing, security, migration, deployment, and delivery rules | Issue-specific working notes |
+| Root `AGENTS.md` router | Target repository | Route implementation intent to project instructions and design intent to Studio | A full copy of Studio or project governance |
+| Project Profile | Target repository | Stable project facts and topic-to-authority pointers | Copied source documents, live issue status, or a roadmap mirror |
+| Active checkpoint | Target repository | Minimum recoverable state of one unfinished design discussion | History, rejected alternatives, published work, or stable project facts |
+| Candidate issue | Current design session | One execution contract under ready review | Exploration history or unresolved blockers |
+| Approved issue | Current design session until publication | Frozen, human-approved execution contract | Mutable execution state |
+| Issue authority | Target project's existing system | Published issue content, ID, status, priority, assignment, and progress | Studio-internal working state |
+| Roadmap authority | Target project's existing system | Durable priorities, sequencing, milestones, and roadmap status | A duplicate Studio roadmap |
+
+## Required semantics and optional paths
+
+The responsibilities above are required. Their paths are not universal.
+
+After examining an existing repository's conventions, a project may choose locations such as:
+
+```text
+AGENTS.md
+docs/project-profile.md
+work/design/active.md
+```
+
+These are recommendations, not required directories. A repository may place the Profile beside existing governance, keep a local-only checkpoint in an ignored directory, or use another established convention. References and router instructions must use the actual chosen paths.
 
 ## Artifact responsibilities
 
-### Target repo governance
-
-保存 coding、architecture、test、CI、security、migration、observability、deployment、PR 與 Definition of Done 規則。這是 project behavior 的最高權威。
-
 ### Project Profile
 
-保存 project identity 與 topic-to-reference routing。它可以指出 commands 與 canonical sources，但不得改寫或複製完整治理規則。
-
-### Roadmap
-
-保存一個 bounded goal 的 Issue boundaries、dependencies、planning frontier 與仍影響後續工作的 decisions。不保存完整 Issue 或即時執行狀態。
+The Project Profile records stable project identity, durable facts that are not already better owned elsewhere, and pointers with load triggers to canonical sources. It may point to commands or planning authorities but must not copy their contents.
 
 ### Active checkpoint
 
-保存尚在討論中的最小可恢復狀態：有效決策、active assumptions、blocking questions、目前 decomposition 與 next focus。它是 working-only、可持續改寫且必須定期清理。
+The active checkpoint exists only when an unfinished discussion must survive a context boundary. It contains:
 
-### Candidate Issue
+- Current objective.
+- Confirmed decisions still needed to resume this discussion.
+- Active assumptions.
+- Blocking questions.
+- Current decomposition.
+- Next discussion focus.
 
-保存正在接受 ready review 的單一 execution contract。它不再保存探索過程，但在 human approval 前仍可修訂。
+It is working-only, continuously rewritten, and removed when no unresolved resumable state remains.
 
-### Approved Issue
+### Candidate and approved issues
 
-保存 frozen Goal、Scope、Requirements、Implementation Plan、Agent discretion、AC、Verification 與必要 safeguards。這是 Studio 的最終輸出。
+A candidate issue is the single execution contract under ready review. After human approval it becomes frozen output and is published to the project issue authority. Publication transfers ongoing ownership to that authority; Studio does not keep a synchronized copy.
 
-### Published Issue
+### Design decomposition
 
-由 Linear、GitHub 或其他 issue manager 擁有。Status、priority、assignee 與 downstream progress 不回寫成 Studio canonical state。
+Large-request decomposition may be maintained temporarily in the checkpoint or another project-owned working artifact. It describes proposed issue boundaries and dependencies only until they are published into the project's established planning authority. It is not a second roadmap.
 
-### Validation review
+### Validation review and quality event
 
-保存候選 Issue 的 blockers、advisories 與 ready 判斷，只向 human 顯示，不合併到 final Issue，也不作為長期 artifact 保存。
+A validation review contains blockers, advisories, and a ready decision for the human reviewer; it is not merged into the final issue or retained as a permanent artifact. A quality event is a lightweight note attached to the project's existing issue or quality system when downstream work reveals a specification defect.
 
-### Quality event
+## Information placement
 
-只有下游發生 spec-related failure 時才建立的輕量事件。通常附著於 published Issue，而不是形成 Studio telemetry database。
+| Information | Canonical owner |
+|---|---|
+| Project-wide rule | Target-repository governance |
+| Stable project fact or authority pointer | Project Profile |
+| Unconfirmed assumption or open question | Active checkpoint only |
+| Current unresolved decomposition | Active checkpoint or project-owned temporary decomposition |
+| Issue-specific requirement, decision, plan, or discretion | Approved issue |
+| Published issue state | Project issue authority |
+| Durable roadmap, priority, or schedule | Project roadmap/planning authority |
+| Execution, PR, CI, or runtime state | The applicable project-native execution system |
 
-## Information categories
-
-| Category | Meaning | Allowed durable destination |
-|---|---|---|
-| Project rule | 對同 project 多個 Issues 有效的治理準則 | Target repo governance |
-| Project mapping | Topic、ref、purpose、load trigger、authority | Project Profile |
-| Milestone decision | 影響 Issue boundaries 或依賴的已批准決策 | Roadmap |
-| User requirement | 必須交付的外部行為或限制 | Approved Issue |
-| Confirmed decision | Human 已批准且影響 scope／strategy 的結果 | Roadmap 或 Issue，依適用範圍 |
-| Active assumption | 尚未證實但目前用於推理的前提 | Active checkpoint only |
-| Implementation guidance | 已決定的策略、boundary 與順序 | Issue |
-| Agent discretion | 不影響契約的低階選擇空間 | Issue |
-| Open question | 會影響方案、尚待回答的問題 | Active checkpoint only |
-| Execution state | Status、PR、CI、runtime progress | Linear／GitHub／ALC |
-
-同一資訊只保留一個 canonical owner。其他 artifacts 只使用 reference 或任務必要的精簡衍生結果。
+One fact has one canonical owner. Other artifacts use references or a task-specific derived statement only when necessary.
 
 ## Decision scope
 
-決策放置位置由影響範圍決定：
+- A project-wide decision changes project governance.
+- A stable project fact or routing decision changes the Project Profile.
+- An issue-specific decision belongs in the issue.
+- An unapproved or unresolved decision remains only in the active checkpoint.
+- A durable priority or sequence belongs in the existing roadmap authority, not Studio.
 
-- 影響整個 project：先更新 project governance。
-- 影響目前 milestone 多個 Issues：放入 roadmap。
-- 只影響單一 Issue：直接寫入 Issue。
-- 尚未批准或仍可能改變：只放 active checkpoint。
+An issue cannot downgrade project policy into an issue-level exception.
 
-Issue 不得把 project-level policy 降格為單一 Issue decision，也不得用 out-of-scope、constraint 或 implementation note 規避 project governance。
+## Versioning and freshness
 
-## Discussion ledger behavior
-
-Discussion AI 可以在 active checkpoint 內維護目前有效決策，但不建立逐輪 decision log。
-
-Ledger／decision view 預設不每輪展示，只在以下情況向 human 顯示：
-
-- 既有決策被修改或取代。
-- 需要 human approval。
-- Human 主動要求查看。
-
-顯示的是目前有效結果與變更影響，不是完整聊天歷史。
-
-## Versioning
-
-- Issue 使用低干擾 `spec_version` marker，以便日後辨識其 information model 版本。
-- Rules、templates 與 Project Profile 的歷史由 Git 管理。
-- 已批准或發布的 Issue 不因 template 更新而 migration。
-- 新版本 template 只影響之後建立的新 Issue。
-- 不在 MVP 建立 schema migration engine。
-
-## Freshness and drift
-
-Studio 不透過複製 repo 狀態防止 drift，而是在需要時重新查詢 authority source。
-
-### Before ready review
-
-- Targeted re-read 與 Issue 相關的 Project Profile refs。
-- 驗證會影響 plan 的 repo assumptions。
-- 確認 commands、boundaries 與 dependencies 仍成立。
-- 若 project policy 已改變，重新 review candidate Issue。
-
-### After publication
-
-- Published Issue 不持續與 Studio draft 同步。
-- Executor 若發現 Issue 與當前 repo state 或 governance 衝突，應停止並回報 evidence。
-- 是否綁定 exact commit／HEAD 由 downstream execution system 決定，不放入 consumer-neutral core。
-
-### Project growth
-
-- Relevant governance change 觸發 Project Profile update proposal。
-- Human approval 後落地，再做 affected-area re-scan。
-- 不定期全量複製 repo context，也不建立背景同步 service。
+- Issues use a low-noise `issue-spec` marker so their contract version can be identified later.
+- Git versions Studio rules, templates, and target-repository Profile changes.
+- Existing approved or published issues are not migrated when a template changes.
+- Before ready review, reread relevant Profile references and verify assumptions that affect feasibility.
+- After publication, the executor reports conflicts against current governance rather than expecting Studio to synchronize a draft.
+- Project growth triggers a targeted Profile update proposal, human approval, and a targeted rescan; it does not trigger a full context mirror.
 
 ## Traceability
 
-Traceability 以最小必要關係表達：
+- A Project Profile entry points to the closest authoritative source.
+- An approved issue points only to directly relevant project references.
+- A published issue ID is recorded only where the project's planning authority normally records it.
+- Requirements, acceptance criteria, and verification use lightweight textual or identifier-based links.
 
-- Project Profile ref 指向 canonical project rule。
-- Roadmap item 指向 published Issue ID（發布後）。
-- Requirement 與 AC 使用簡單文字對應或 identifiers。
-- Verification 指向能證明 AC 的 test、command 或 observable result。
-
-不要求大型 traceability matrix。當關係已能由短 Issue 清楚理解時，不增加額外標記。
+Do not create a large traceability matrix when a short issue already makes the relationships clear.

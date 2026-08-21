@@ -1,37 +1,37 @@
 <!-- issue-spec: v1 -->
 
-# 修正登入失敗時的重複錯誤文案
+# Remove the duplicate login error message
 
 ## Goal
 
-登入密碼錯誤時只顯示一次既有的「帳號或密碼錯誤」訊息。
+Display the existing "Incorrect account or password" message only once when a password is wrong.
 
 ## Scope
 
-- 移除登入頁面在同一次失敗回應中產生的重複錯誤提示。
-- 保持現有錯誤文案與視覺樣式不變。
+- Remove the duplicate error presentation produced for one failed login response.
+- Preserve the existing error text and visual style.
 
 ## Implementation Plan
 
-1. 找出登入失敗回應同時寫入兩個錯誤呈現來源的位置。
-2. 保留現行標準錯誤呈現路徑，移除該流程中的重複寫入。
-3. 更新或新增涵蓋單次錯誤呈現的既有層級測試。
+1. Identify where one failed login response writes to two error-presentation sources.
+2. Preserve the standard error path and remove the duplicate write from this flow.
+3. Update or add a test at the existing test layer for single-message presentation.
 
 ## Agent discretion
 
-- 可依現有 frontend conventions 決定局部測試名稱與 helper 使用方式。
+- Follow existing frontend conventions for local test names and helper usage.
 
 ## Acceptance Criteria
 
-- [ ] 密碼錯誤時畫面只出現一次「帳號或密碼錯誤」。
-- [ ] 成功登入行為不受影響。
-- [ ] 其他登入錯誤仍使用現有錯誤處理機制。
+- [ ] A wrong password displays one "Incorrect account or password" message.
+- [ ] Successful login behavior is unchanged.
+- [ ] Other login failures continue to use the existing error-handling mechanism.
 
 ## Verification
 
-- 執行登入頁面既有測試。
-- 新增或更新測試，斷言一次失敗回應只產生一個可見錯誤提示。
+- Run the existing login-page tests.
+- Add or update a test asserting that one failed response produces one visible error message.
 
 ## Execution fallback
 
-若重複訊息來自兩個不能局部移除的獨立 error contracts，停止並回報證據，不要自行重構全域錯誤處理。
+If the duplicate messages come from independent error contracts that cannot be changed locally, stop and report evidence instead of redesigning global error handling.

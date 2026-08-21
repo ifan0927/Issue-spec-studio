@@ -2,59 +2,57 @@
 
 ## Core output boundary
 
-Studio 的責任終點是產生一份經 human approval 的標準 Markdown Issue。
+Studio's responsibility ends with one human-approved standard Markdown issue.
 
-將內容發布到 Linear、GitHub 或其他平台，可以由當前 discussion AI 使用平台工具完成，也可以由 human 手動完成；發布能力不進入 core。
+The current discussion AI or a human may publish it to Linear, GitHub, or another platform. Publication capability is not part of the core methodology, and Studio does not retain a synchronized published copy.
 
-## Linear
+## Issue and roadmap authorities
 
-Linear 預期是主要 Issue 管理平台與 Issue ID 來源。
+Each target project identifies its existing issue and roadmap authorities in the Project Profile.
 
-- Studio 不預先配置 Issue ID。
-- 發布後由 Linear 產生 ID。
-- Status、priority、assignee 與 execution progress 以 Linear 為準。
-- Studio 不建立自動雙向同步。
+- The issue authority owns published issue IDs, content, status, priority, assignment, and execution progress.
+- The roadmap authority owns durable goals, sequencing, milestones, schedule, and roadmap status.
+- These may be the same system or different systems.
+- Studio and project-local working artifacts do not mirror either system.
 
-## GitHub
+## GitHub and Linear
 
-GitHub 保存 target repo、governance、code、PR、CI 與 review evidence。Studio 只在需要 project context 或 repo evidence 時讀取。
+GitHub may own the target repository, governance, code, pull requests, CI, review evidence, issues, or roadmap data. Linear may own issues, IDs, projects, cycles, and execution status. The actual authority is project-specific; Studio does not assume one universal platform.
 
-Issue 發布到 GitHub 時仍使用同一份標準 Markdown，不需要改變 canonical semantics。
+When an issue is published, the platform-specific system owns its ongoing state. Studio does not preallocate IDs or perform background synchronization.
 
 ## Coding agents
 
-Coding agent 應讀取：
+A coding agent reads:
 
-- 最終 coding Issue。
-- Target repo 的 agent instructions 與適用治理文件。
-- Issue 明確引用的 task-specific context。
+- The final coding issue from the project's issue authority.
+- Target-repository agent instructions and applicable governance.
+- Task-specific sources explicitly referenced by the issue.
 
-Coding agent 不依賴 discussion roadmap 或 working ledger。需要理解背景時，以 execution contract 與其必要 references 為入口。
+It does not depend on the active checkpoint, discussion transcript, validation review, or a Studio roadmap.
 
-## ALC
+## ALC and other executors
 
-ALC 是眾多 downstream consumers 之一。
+ALC is one possible downstream consumer.
 
-- Studio 不依賴 ALC code、database、state machine 或 TUI。
-- ALC 的需求不是 canonical domain model。
-- Studio 不管理 Codex execution、verification、review、PR、merge 或 cleanup。
-- Issue 中可以加入「計畫不可行時停止並回報 spec defect」的防禦性提示；實際 enforcement 是 ALC／executor 責任。
-- 若執行中的需求罕見地重大改變，由 human 手動停止 ALC，再建立 replacement Issue。
+- Studio does not depend on its code, database, state machine, or interface.
+- Executor requirements do not define Studio's canonical model.
+- Studio does not manage execution, verification, review, pull requests, merge, or cleanup.
+- The issue may instruct an executor to stop and report evidence when the plan is infeasible; enforcement belongs to the executor.
+- A substantive change to executing work follows the target project's stop-and-redesign policy.
 
-## Renderer and adapter
+## Renderers and adapters
 
-MVP 不建立 renderer framework。標準 Markdown 本身就是 portable output。
+The MVP does not include a renderer framework. Standard Markdown is the portable output.
 
-未來若 consumer 確實需要特殊格式，可以建立 thin adapter，但必須遵守：
+A future thin adapter may provide a consumer-specific presentation only if it:
 
-- 不改變 Goal、Scope、Requirements、Plan、AC 或 Verification 的語意。
-- 不補造 canonical artifact 缺少的需求。
-- 不把 consumer-specific runtime state 回寫成 core schema。
-- 轉換後仍須保持 coding-ready。
-- 可刪減的只能是對該 consumer 非必要且不影響執行契約的 presentation metadata。
+- Preserves the meaning of Goal, Scope, Requirements, Plan, Acceptance Criteria, and Verification.
+- Does not invent missing requirements.
+- Does not write consumer runtime state into the core model.
+- Keeps the result coding-ready.
+- Removes only presentation metadata that is unnecessary for that consumer.
 
-## Skill
+## User-facing skill
 
-MVP 先以 local Studio project 運作，不要求 Skill。
-
-未來若需要從其他 repo 或 ChatGPT context 快速啟動，可以建立單一、薄的 user-facing Skill。Skill 只負責找到 Studio、載入 bootstrap 與引導工作流程，不保存 canonical state，也不拆成 analyze／clarify／plan 等多個 Skills。
+A future thin skill may help detect design intent, locate Studio, load the target project's Profile, and guide the workflow. It must not store project state, replace the root router, or split the method into persistent analyze, clarify, and plan state machines.

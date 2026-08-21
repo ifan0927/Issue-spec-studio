@@ -2,88 +2,85 @@
 
 ## MVP product
 
-MVP 是一個 documentation-first、local-first 的 Issue Spec Studio：
+The MVP is a documentation-first, local-first methodology package:
 
-- Repo-level bootstrap instructions。
-- 極小 `START_HERE.md`。
-- Versioned product rules 與 templates。
-- Project Profile onboarding 方法。
-- Roadmap 與 Issue decomposition 方法。
-- Active checkpoint 與 context hygiene。
-- Compact／standard authoring depth。
-- Risk overlays。
-- Coding-ready gate 與 human approval。
-- 標準 Markdown output。
+- Target-repository root routing guidance.
+- A minimal Studio `START_HERE.md`.
+- Versioned product rules and artifact contracts.
+- Project Profile onboarding.
+- Temporary active-checkpoint hygiene.
+- Issue decomposition without roadmap duplication.
+- Compact and standard authoring depths.
+- Risk overlays.
+- Coding-ready review and human approval.
+- Standard Markdown output.
+
+Project instances of Profiles, checkpoints, and design sessions live in target repositories. The Studio repository contains only reusable material.
 
 ## MVP does not include
 
-- Product CLI。
-- Database 或 service。
-- TUI／web UI。
-- Workflow state machine。
-- Linear／GitHub 自動發布。
-- ALC integration。
-- Renderer framework。
-- JSON／YAML canonical schema。
-- Template migration engine。
-- Quality score。
-- Automatic compact classifier。
-- 多個 workflow Skills。
-- 永久 transcript／ledger storage。
+- A product CLI, database, service, TUI, or web UI.
+- A workflow state machine.
+- Automatic Linear, GitHub, or roadmap publication.
+- ALC integration.
+- A renderer framework.
+- A JSON or YAML canonical schema.
+- A template migration engine.
+- A quality score or automatic compact classifier.
+- Multiple workflow skills.
+- Permanent transcript, ledger, checkpoint archive, or per-project workspace storage.
 
 ## Internal scripts
 
-`scripts/` 是保留擴充點，不是 MVP 前提。
+`scripts/` is a possible maintenance extension, not an MVP prerequisite.
 
-只有 paper prototype 與真實使用持續出現相同 deterministic errors 時才加入，例如：
+Add a script only after real use repeatedly reveals the same deterministic error, such as missing headings, an invalid version marker, broken references, unresolved placeholders, duplicate identifiers, a final issue referencing working state, or unintended non-English content.
 
-- 必要 headings 缺漏。
-- Spec marker 格式錯誤。
-- Broken refs。
-- Placeholder 未清除。
-- Requirement／AC identifier 重複或懸空。
-- Final Issue 引用 working-only file。
-
-Scripts 不做 semantic decisions、不連接平台、不保存狀態，也不發展成 workflow CLI。
+Scripts make deterministic checks. They do not make semantic decisions, connect platforms, store target-project state, or become a workflow CLI.
 
 ## MVP validation scenarios
 
 ### Compact change
 
-確認小型文案、bug、設定或局部 refactor 可以低摩擦完成，而且不載入不相關 context。
+Confirm that a small copy, bug, configuration, or refactor request can be specified with low friction and without loading unrelated context.
 
 ### Standard feature
 
-確認一般功能可由 Profile 精準載入規範，並產生足以直接實作的 plan、AC 與 verification。
+Confirm that a Profile routes precisely to project guidance and produces an implementable plan, acceptance criteria, and verification.
 
-### Roadmap decomposition
+### Large-request decomposition
 
-確認大型目標能拆成多個可獨立交付 Issues，且 roadmap 不複製即時執行狀態。
+Confirm that a bounded goal becomes independently deliverable issues while the project roadmap remains solely in its existing authority.
 
 ### High-risk change
 
-確認 migration、compatibility、安全、部署或跨系統工作會啟用必要 overlays、證據與 Issue split。
+Confirm that migration, compatibility, security, deployment, and cross-system work activate appropriate overlays, evidence, and issue splits.
+
+### Resume and cleanup
+
+Confirm that a new discussion can resume from a minimal project-owned checkpoint and that approved or published state leaves the checkpoint.
 
 ## MVP acceptance
 
-- Bootstrap 維持短小，只提供 routing。
-- 一般任務只載入少量 relevant refs。
-- Project Profile 不複製完整 governance。
-- Compact task 的規格成本不高於實作成本。
-- Standard Issue 不要求 coding agent 補高階策略。
-- 高風險工作會補足 safeguards 或被拆分。
-- 新對話可從乾淨 active checkpoint 恢復。
-- 最終 Issue 為乾淨、可獨立閱讀的 Markdown。
-- Studio 不成為 Linear、GitHub、repo 或 ALC 的第二份狀態來源。
+- The Studio bootstrap remains small and routes to relevant methodology.
+- A target root router distinguishes implementation and design intent.
+- Routine design loads only a few relevant references.
+- A Project Profile contains stable facts and pointers, not copied governance or planning state.
+- A checkpoint contains only unresolved resumable state and is removed when no longer needed.
+- Compact specification effort remains below implementation effort.
+- A standard issue does not require the coding agent to make high-level strategy decisions.
+- High-risk work gains safeguards or is decomposed.
+- The final issue is clean, independently readable Markdown.
+- Published issues, roadmaps, and execution state remain solely in target-project authorities.
+- The Studio repository contains no long-lived per-project workspace.
 
 ## Deferred evolution
 
-有真實證據後才考慮：
+Consider only after real evidence:
 
-- 單一薄 Skill 作為跨環境入口。
-- Studio 內部 deterministic check scripts。
-- CI lint。
-- Consumer-specific thin adapters。
-- 更正式的 schema versioning。
+- A thin user-facing skill for locating and applying Studio from a target repository.
+- Deterministic maintenance scripts and CI lint.
+- Consumer-specific thin adapters.
+- More formal contract versioning.
 
-Spec-kit 的 clarify、constitution、plan、analyze 等概念可以作為設計參考，但 MVP 不採用或 fork 其完整多 artifact workflow。
+Concepts from spec-kit may inform clarification, constitution, planning, and analysis, but the MVP does not adopt or fork its full multi-artifact workflow.

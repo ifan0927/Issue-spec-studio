@@ -1,18 +1,18 @@
-# Active Work
+# Active Design Checkpoint
 
-> Working-only checkpoint。不得被 final Issue 引用；每個階段完成後依 context hygiene contract 壓縮。
+> Optional, target-project-owned, and working-only. Create only when an unfinished design discussion must be resumed later. Rewrite the current state; never append a transcript or activity log. A final issue must not reference this file.
 
 ## Current objective
 
-<目前正在解決的單一問題。>
+<The single problem currently being resolved.>
 
 ## Confirmed decisions
 
--
+- None.
 
 ## Active assumptions
 
--
+- None.
 
 ## Blocking questions
 
@@ -20,8 +20,13 @@
 
 ## Current decomposition
 
--
+- None.
 
 ## Next discussion focus
 
-<下一個真正會改變方案的問題。>
+<The next unresolved point that can materially change the design.>
+
+<!--
+Remove answered questions, invalid assumptions, rejected alternatives, and content already published elsewhere.
+Remove this checkpoint when no unresolved state is needed for resumption.
+-->

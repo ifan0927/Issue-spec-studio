@@ -2,56 +2,69 @@
 
 ## Product statement
 
-Issue Spec Studio 將自然語言對話、已批准的 project context 與 repo 現況，轉換為可交給 coding agent 或人工開發者執行的標準 Markdown Issue。
+Issue Spec Studio is a reusable design methodology and context-routing system. It turns natural-language intent, approved project context, and current repository evidence into a standard Markdown issue that a coding agent or developer can execute.
 
-它負責 Issue coding-ready 之前的需求工作，不負責 Issue 被接單之後的執行控制。
+Studio owns the method up to the coding-ready decision. It does not own a long-lived workspace for any target project and does not control execution after publication.
 
 ## Primary user
 
-主要使用者是單人開發者：透過 ChatGPT、Codex 或其他 discussion AI 討論需求，再將結果交給 coding agent、Linear、GitHub 或人工流程。
+The primary user is an individual developer who discusses a request with ChatGPT, Codex, or another discussion AI, then hands the approved result to a coding agent, an issue system, or a human implementation workflow.
 
-設計不為尚未證實的多人協作、企業治理或大規模平台需求增加複雜度。
+The design does not add complexity for unproven multi-user, enterprise-governance, hosted, or large-scale platform needs.
+
+## Studio owns
+
+- The design methodology and terminology.
+- Artifact semantics and ownership contracts.
+- Project Profile, active-checkpoint, decomposition, and issue templates.
+- Context-routing and project-onboarding guidance.
+- Compact and standard authoring depths and risk overlays.
+- Semantic review and the coding-ready gate.
+- Consumer-neutral Markdown output conventions.
+
+## The target project owns
+
+- Project governance and authoritative engineering documents.
+- A thin root `AGENTS.md` that routes design and implementation intent.
+- Its Project Profile and any resumable active checkpoint.
+- Repository evidence and project-specific decisions.
+- Its existing issue, roadmap, planning, and execution authorities.
 
 ## In scope
 
-- 從自然語言形成結構化需求。
-- 發現缺漏、歧義、衝突與不可驗證描述。
-- 產生少量高資訊價值的 clarifying questions。
-- 區分 confirmed decisions、assumptions、implementation guidance 與 agent discretion。
-- 依任務規模採 compact 或 standard authoring depth。
-- 依 migration、compatibility、安全、部署等風險增加必要 overlay。
-- 將大型需求拆成可獨立安全執行與驗證的 Issues。
-- 維護 bounded milestone roadmap。
-- 建立及更新 Project Profile。
-- 在輸出前執行 semantic review、ready gate 與 human approval。
-- 輸出 consumer-neutral 的標準 Markdown Issue。
+- Structure a request and identify missing, ambiguous, conflicting, or unverifiable statements.
+- Ask a small number of high-information clarifying questions.
+- Distinguish requirements, confirmed decisions, active assumptions, implementation guidance, and agent discretion.
+- Decompose large requests into independently implementable and verifiable issues.
+- Produce a bounded decomposition without copying the project roadmap.
+- Route to project-native authority through a durable Project Profile.
+- Preserve only the minimum recoverable state of an unfinished discussion.
+- Run semantic review, the coding-ready gate, and human approval before output.
 
 ## Out of scope
 
-- 接單、排程、執行 coding agent。
-- 管理 worktree、branch、commit、PR、CI、merge 或清理。
-- 追蹤 ALC runtime state。
-- 自動同步 Linear、GitHub 或其他 issue manager。
-- 成為另一個 project management system。
-- 維護完整聊天紀錄或永久 discussion ledger。
-- 在 MVP 建立 database、service、TUI、workflow engine 或 renderer framework。
-- 要求 Issue 重複 project governance。
-- 讓 Issue 覆寫 project-level rules。
-- 對所有任務套用大型 PRD 儀式。
+- Owning permanent per-project workspaces or current project state.
+- Receiving, scheduling, or running coding agents.
+- Managing worktrees, branches, commits, pull requests, CI, merges, or cleanup.
+- Tracking ALC or other executor runtime state.
+- Mirroring or automatically synchronizing Linear, GitHub, another issue manager, or a project roadmap.
+- Becoming a second project-management system.
+- Keeping a conversation transcript, chronological activity log, complete brainstorm archive, rejected alternatives, or permanent decision ledger.
+- Creating a database, service, TUI, workflow engine, or renderer framework in the MVP.
+- Repeating project governance in every issue or allowing an issue to override project rules.
+- Applying heavyweight product-document rituals to every request.
 
 ## Independence
 
-核心模型不依賴 ChatGPT、Codex、Linear、GitHub、ALC 或 spec-kit。任何平台能力都是外部入口或 consumer。
-
-即使完全不使用 ALC，Studio 仍能服務一般 coding agent、人工開發、GitHub Issue 或 Linear Issue。
+The core model does not depend on ChatGPT, Codex, Linear, GitHub, ALC, or spec-kit. Platform capabilities are entry points or downstream consumers.
 
 ## Success conditions
 
-- 相似需求能產生結構與品質一致的 Issue。
-- Coding agent 不需要補做高階產品或實作策略決策。
-- Issue 足以驗收，且不過度鎖死低階實作細節。
-- 小修改的規格成本維持低於實作成本。
-- 高風險修改會要求額外分析、拆分與證據。
-- 新對話或 context compaction 後可從乾淨 checkpoint 恢復。
-- Project onboarding 後能依 references 按需取得規範，而非重複掃描或全文載入。
-- 已發布 Issue 與執行狀態只由其權威系統管理。
+- Similar requests produce issues with consistent structure and quality.
+- A coding agent does not need to repeat high-level product or implementation-strategy decisions.
+- The issue is verifiable without overconstraining low-level implementation.
+- Small changes cost less to specify than to implement.
+- High-risk changes require appropriate evidence, safeguards, and decomposition.
+- A new discussion can resume from a clean project-owned checkpoint.
+- Project context loads through references instead of repeated full-repository scans.
+- Published issues, roadmaps, and execution status exist only in their project-native authorities.

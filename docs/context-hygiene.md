@@ -2,106 +2,116 @@
 
 ## Principle
 
-Context 採 pull-based progressive disclosure：bootstrap 只負責導航，Project Profile 只負責 mapping，discussion AI 只在任務需要時載入必要 canonical sources。
+Context uses pull-based progressive disclosure. The target repository's root router selects the workflow, the Project Profile maps topics to authorities, and the discussion AI loads only what the task requires.
 
-不得把「有 reference」理解成「必須遞迴讀取所有 reference」。
+A reference is not an instruction to recursively read all of its references.
 
 ## Context layers
 
-### L0 — Bootstrap
+### L0 — Target root router
 
-固定載入，但只包含目的、基本循環、authority rule 與 reference routing。
+Always available and intentionally thin. It distinguishes implementation from design intent and points to the correct project-native instructions.
 
 ### L1 — Project Profile
 
-選定 target project 後載入。Profile 告訴 AI 哪些 topic 對應哪些 canonical source，以及何時需要讀取。
+Loaded for a design session. It records stable facts and maps topics to canonical sources with load triggers.
 
 ### L2 — Task-relevant governance
 
-依 task trigger 載入，例如 authentication、API compatibility、migration、testing 或 deployment 規範。
+Loaded only when triggered, such as authentication, API compatibility, migration, testing, deployment, or delivery rules.
 
 ### L3 — Repository evidence
 
-只有需要確認現況、驗證 assumption 或形成 implementation plan 時才讀實際 source、tests、configuration 或 CI。
+Read source, tests, configuration, or CI only to verify current behavior, validate an assumption, or make the implementation plan concrete.
 
-Existing project 首次 onboarding 可以完整掃描；日常 authoring 不可無目的重掃完整 repository。
+An existing project's first onboarding may use broad discovery. Routine authoring must not rescan the whole repository without a task-specific reason.
 
 ## Reference contract
 
-每個重要 ref 必須能辨識：
+Each important reference identifies:
 
-- `Ref`：可定位的文件或 source。
-- `Purpose`：它提供什麼決策資訊。
-- `Load when`：什麼任務條件才需要載入。
-- `Authority`：canonical、supporting evidence 或 working-only。
+- `Ref`: a resolvable document, source location, command authority, issue system, or roadmap system.
+- `Purpose`: the decision information it provides.
+- `Load when`: the condition that makes it relevant.
+- `Authority`: canonical, supporting evidence, or working-only.
 
-Ref 應指向最接近原始權威的來源，不複製其完整內容。Leaf document 應單一責任、乾淨、可直接理解。
+Point to the closest authoritative source instead of copying it. Keep leaf documents focused and independently understandable.
 
-## Prohibited reference patterns
+## Prohibited patterns
 
-- Bootstrap 直接載入所有 rules 和 examples。
-- Project Profile 複製完整 coding guide。
-- Roadmap 複製完整 Issues。
-- Issue 複製 project-wide DoD 或一般 test commands。
-- Local file 複製 Linear 即時 status。
-- A 引用 B 後自動展開 B 的全部 references。
-- 以多層 redirect 保留已失效文件路徑。
-- 最終 Issue 引用 `active.md`、scratch notes 或 validation report。
+- A root router that copies all Studio rules or all project governance.
+- A Project Profile that duplicates a coding guide, issues, or a roadmap.
+- A local file that copies live status from Linear, GitHub, or another project system.
+- An issue that repeats project-wide Definition of Done or generic test commands.
+- Recursive loading of every reference.
+- Redirect chains retained only to preserve obsolete paths.
+- A final issue that references an active checkpoint, scratch note, or validation report.
+- Project-specific working state stored in the Studio repository.
 
 ## Active checkpoint
 
-`active.md` 只保存恢復當前 discussion 所需的最小有效狀態：
+An active checkpoint is optional. Create it only to preserve the minimum recoverable state of an unfinished discussion:
 
-- Current objective
-- Confirmed decisions
-- Active assumptions
-- Blocking questions
-- Current decomposition
-- Next discussion focus
+- Current objective.
+- Confirmed decisions.
+- Active assumptions.
+- Blocking questions.
+- Current decomposition.
+- Next discussion focus.
 
-它不是 transcript、timeline、完整 brainstorm、已否決方案集合或永久 decision archive。
+It must not become:
+
+- A conversation transcript.
+- A chronological activity log.
+- A complete brainstorm archive.
+- A collection of rejected alternatives.
+- A permanent decision archive.
+- A duplicate project dashboard.
+- A mirror of published issues or the project roadmap.
 
 ## Compaction rules
 
-### Clarification 完成
+### After clarification
 
-- 移除已回答 questions。
-- 將有效答案提升為 confirmed decisions。
-- 刪除被否決方案。
-- 移除已失效 assumptions。
+- Remove answered questions.
+- Keep only effective confirmed decisions needed for resumption.
+- Delete rejected alternatives and invalid assumptions.
 
-### Decomposition 完成
+### After decomposition
 
-- 將穩定 Issue boundaries 移至 roadmap。
-- Active 只留下目前正在細化的 Issue。
-- 不複製其他 Issues 的完整內容。
+- Keep only unresolved issue boundaries and dependencies.
+- Publish approved issue boundaries to the existing project authority.
+- Do not copy the full contents or status of other issues.
 
-### Candidate issue 完成
+### After candidate drafting
 
-- 已進入 draft 的內容不在 active 重複。
-- Active 只保留未解 blocker、待批准 decision 與 draft ref。
+- Do not duplicate content already present in the candidate.
+- Keep only unresolved blockers, decisions awaiting approval, and the candidate reference.
 
-### Approval／publication 完成
+### After approval or publication
 
-- 清空該 active work。
-- Roadmap 只保留仍影響後續規劃的結構性資訊。
-- 不預設建立 active archive。
+- Remove completed or published state from the checkpoint.
+- Move stable project facts to governance or the Profile only through normal approval.
+- Leave published issues, roadmap state, and execution status in their existing authorities.
+- Do not create an active-state archive by default.
 
-Git history、published Issue 與 authority systems 已提供必要歷史，不在 Studio 再建立一份鏡像。
+Version control, published issues, decision records, and project authorities provide history. The active checkpoint does not.
 
-## Roadmap hygiene
+## Workspace rule
 
-Roadmap 只保存目前 bounded goal、Issue boundaries、dependencies、learning frontier 與仍有效 decisions。Linear status、PR、CI、ALC logs 與過期計畫不進入 roadmap。
+Target-project checkpoints live in the target project at a path chosen after inspecting its conventions. They may be tracked or ignored according to that project's collaboration and retention needs.
 
-## Maintenance checks
+The Studio repository's `work/` directory is only disposable scratch space for maintaining the Studio methodology. It never contains target-project Profiles, checkpoints, decompositions, issue drafts, or roadmap copies.
 
-未來若實際使用證明有需要，可加入 Studio 內部 scripts 檢查：
+## Deterministic maintenance checks
 
-- Broken local references。
-- 缺少 purpose／load trigger 的 refs。
-- Bootstrap 直接引用過多內容。
-- Final Issue 引用 working-only artifact。
-- Active 出現 transcript/history sections。
-- Profile 大量複製 governance text。
+Add scripts only after repeated evidence shows that a deterministic check is useful, for example:
 
-Scripts 只做 deterministic checks，不決定該載入哪些語意 context。
+- Broken local references.
+- Profile references without purpose or load triggers.
+- Final issues that reference working-only artifacts.
+- Checkpoints containing transcript or history sections.
+- Profiles that copy large governance blocks.
+- CJK text in an English-only Studio release.
+
+Scripts validate structure; they do not decide which semantic context to load.

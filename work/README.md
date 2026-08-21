@@ -1,5 +1,5 @@
-# Working Area
+# Studio Maintenance Scratch Area
 
-此目錄供本地使用時保存暫時的 Project refs、roadmap、active checkpoint 與 candidate Issues。
+This ignored directory is only for disposable work while maintaining the reusable Issue Spec Studio methodology. Nothing here is canonical or expected to survive a completed maintenance task.
 
-除本說明外，working artifacts 預設不進入 durable repository history。使用時必須遵守 `docs/context-hygiene.md`：按需載入、階段性壓縮、批准或發布後清理。
+Never place a target project's Project Profile, active checkpoint, design decomposition, issue draft, published issue, or roadmap copy here. Project-specific design sessions and resumable state belong in the target repository at paths selected from that repository's own conventions.

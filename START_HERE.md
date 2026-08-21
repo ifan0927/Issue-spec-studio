@@ -1,38 +1,48 @@
 # Start Here
 
-本文件是 Issue Spec Studio 的最小 bootstrap。它只負責導航，不承載完整產品知識。
+This file is the minimum bootstrap for Issue Spec Studio. It routes work; it does not contain the complete methodology or any target-project state.
 
-## 基本工作循環
+## Where a session runs
 
-1. 確認正在處理的 target project 與本輪目標。
-2. 讀取該 project 已批准的 Project Profile。
-3. 依 Profile 的 load trigger 讀取必要治理與 repo reference。
-4. 在對話中執行 analyze、clarify、decompose、plan。
-5. 維護最小 active checkpoint；每個階段完成後立即壓縮。
-6. 形成候選 Markdown Issue，執行 coding-ready review。
-7. 取得 human approval 後輸出；發布由使用者或當前對話 AI 處理。
+A design session runs in the target project's repository. Begin with that repository's thin root `AGENTS.md` router:
 
-## Reference routing
+- Implementation requests follow the project's existing implementation instructions and authoritative engineering documents.
+- Design, specification, decomposition, or ambiguity-resolution requests use the Studio methodology.
 
-只在符合 trigger 時讀取下列文件；不得因為存在連結就全部展開。
+The Studio repository supplies the method and templates. It is not a workspace for target projects.
 
-| 當前任務 | 必要 reference |
+## Basic design loop
+
+1. Confirm the target project and current design objective.
+2. Read the target project's approved Project Profile.
+3. Follow its load triggers to read only the required governance and repository evidence.
+4. Analyze, clarify, decompose, and plan in the current discussion.
+5. Create an active checkpoint only if the discussion must be resumed later; keep it minimal and compact it at every phase boundary.
+6. Produce a candidate Markdown issue and run the coding-ready review.
+7. Freeze the output after human approval, publish it to the project's existing issue authority, and remove completed state from the active checkpoint.
+
+## Methodology routing
+
+Read a reference only when its trigger applies. Do not recursively expand references merely because they exist.
+
+| Current task | Required reference |
 |---|---|
-| 理解產品邊界、責任與非目標 | `docs/product-boundary.md` |
-| 理解 artifacts、ownership、版本與 freshness | `docs/information-model.md` |
-| 理解端到端工作方式與 artifact lifecycle | `docs/operating-model.md` |
-| 設計或檢查 canonical Issue | `docs/issue-model.md`、`docs/ready-gate.md` |
-| 拆分需求或維護 milestone roadmap | `docs/roadmap-and-decomposition.md` |
-| 新專案或既有 repo onboarding | `docs/project-onboarding.md` |
-| 載入 context、維護 reference 或清理 active work | `docs/context-hygiene.md` |
-| 發布、consumer、ALC 或未來 adapter 邊界 | `docs/consumer-boundaries.md` |
-| 規格品質、失敗事件或衡量方式 | `docs/quality-measurement.md` |
-| 決定 MVP 與後續工作 | `docs/mvp.md`、`HANDOFF.md` |
+| Understand product boundaries, responsibilities, or non-goals | `docs/product-boundary.md` |
+| Understand artifacts, ownership, authority, versioning, or freshness | `docs/information-model.md` |
+| Understand the end-to-end design session and artifact lifecycle | `docs/operating-model.md` |
+| Design or review a canonical issue | `docs/issue-model.md`, `docs/ready-gate.md` |
+| Decompose a large request or coordinate with a project roadmap | `docs/roadmap-and-decomposition.md` |
+| Onboard a new or existing target repository | `docs/project-onboarding.md` |
+| Route context or maintain an active checkpoint | `docs/context-hygiene.md` |
+| Adopt the methodology or migrate existing work prospectively | `docs/adoption-and-migration.md` |
+| Understand publication, consumers, ALC, or adapter boundaries | `docs/consumer-boundaries.md` |
+| Measure specification quality | `docs/quality-measurement.md` |
+| Decide MVP scope or subsequent work | `docs/mvp.md`, `HANDOFF.md` |
 
 ## Authority rule
 
-Target repo 的已批准治理規則高於 roadmap 與 Issue。發現衝突時停止 ready 判定，先提出 project-level change；不得在 Issue 中例外覆寫。
+Approved target-repository governance outranks a Project Profile, active checkpoint, decomposition, and issue. If a conflict appears, stop the ready decision and propose a project-level change; never encode an exception in an issue.
 
 ## Output rule
 
-最終輸出是單一、乾淨、可獨立閱讀的 Markdown Issue。不得包含 unresolved questions、討論紀錄、validation report 或已否決方案。
+The final output is one clean, independently readable Markdown issue. It contains no unresolved questions, discussion transcript, validation report, rejected alternatives, or duplicated project-wide guidance.

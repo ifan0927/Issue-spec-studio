@@ -1,69 +1,72 @@
-# Roadmap and Issue Decomposition
+# Decomposition and Roadmap Boundaries
 
-## Roadmap purpose
+## Purpose
 
-Roadmap 幫助 human 與 discussion AI 在一個 bounded goal／milestone 內管理 Issue boundaries、依賴與學習順序。
+Studio helps a human and discussion AI split a bounded goal into independently implementable and verifiable issue outcomes. It does not own a durable roadmap.
 
-Coding agent 原則上不依賴 roadmap。它從獲派的 coding Issue execution contract 取得所需內容。
+The target project's existing issue and roadmap systems remain authoritative for published work, sequencing, priority, schedule, and status. A Project Profile may point to those systems but must not copy them.
 
-## Roadmap boundary
+## Working decomposition
 
-Roadmap 只涵蓋目前目標以及到下一個 meaningful learning point 所需的工作，不試圖預先展開完整產品未來。
+Before publication, a project-owned checkpoint or optional temporary decomposition may hold:
 
-Roadmap 保存：
+- The bounded goal and success condition.
+- Confirmed scope boundaries.
+- Proposed issue outcomes.
+- Necessary dependencies.
+- Why each outcome can be verified independently.
+- The next learning frontier.
+- Unresolved decisions that still affect the split.
 
-- Goal 與 success condition。
-- 已確認的 scope boundary。
-- Issue decomposition。
-- Issues 之間的必要 dependency。
-- 為何此切割可以獨立驗證。
-- 下一個需要重新規劃的 learning frontier。
-- 仍會影響未來 Issue 的有效 decisions。
+It must not hold:
 
-Roadmap 不保存：
+- Full issue specifications.
+- Live status, priority, assignment, or scheduling copied from an issue system.
+- Pull-request, CI, or executor logs.
+- Historical versions or rejected splits.
+- A speculative long-range issue inventory.
 
-- 每個 Issue 的完整規格。
-- Linear 即時 status、priority 或 assignee。
-- PR、CI、ALC execution logs。
-- 歷史 roadmap 版本或被否決方案。
-- 固定且沒有證據支持的長期 Issue 數量。
+Use [the decomposition template](../templates/decomposition.md) only when the active checkpoint's `Current decomposition` section is too small to remain readable. Remove or compact the temporary artifact after approved outcomes are published.
 
 ## Decomposition rules
 
-優先切出多個小 Issue，只要每個 Issue 都：
+Prefer smaller issues when each one:
 
-- 交付一個有意義 outcome。
-- 可在明確 repo state 上開始。
-- 可獨立 review。
-- 有自己的 AC 與 verification evidence。
-- 失敗時不會迫使整個大型變更一起回退。
-- 不要求 coding agent 推測其他 Issue 的策略。
+- Delivers a meaningful outcome.
+- Can start from a clear repository state.
+- Can be reviewed independently.
+- Has its own acceptance and verification evidence.
+- Can fail or roll back without forcing unrelated work to roll back.
+- Does not require the coding agent to infer another issue's strategy.
 
-應拆分的常見信號：
+Common split signals include:
 
-- 包含多個不同使用者 outcome。
-- 同時跨越 preparation、migration、cutover 與 cleanup。
-- 需要先探索或驗證未知技術前提。
-- 一個 PR 無法合理 review。
-- Verification 必須分不同環境或時間完成。
-- 任何部分失敗都會使整個 Issue 無法安全交付。
-- 需求變動可能只影響部分工作。
+- Multiple user outcomes.
+- Preparation, migration, cutover, and cleanup in one item.
+- An unknown technical premise that needs a spike or evidence.
+- A change too large for reasonable review.
+- Verification in different environments or times.
+- A failure in one part that makes the entire item unsafe.
+- Likely requirement changes that would affect only part of the work.
 
 ## Planning frontier
 
-Roadmap 只詳細規劃到下一個會產生新資訊的點，例如：
+Plan in detail only through the next point that will create important information, such as:
 
-- 完成 architecture spike。
-- 確認 migration 可行性。
-- 建立第一個垂直切片。
-- 驗證 integration contract。
-- 取得 production behavior evidence。
+- Completing an architecture spike.
+- Confirming migration feasibility.
+- Delivering the first vertical slice.
+- Validating an integration contract.
+- Obtaining production-behavior evidence.
 
-越過 frontier 的內容只保留 outcome 與暫定方向；取得新證據後再更新 roadmap。如此避免需求反覆時不斷維護龐大的遠期計畫。
+Beyond that frontier, keep only the intended outcome and a provisional direction. Update the project roadmap in its authority after new evidence arrives.
 
-## Change handling
+## Publication and change handling
 
-- 尚未發布的 Issue 可在 roadmap review 中重新切割。
-- 已發布但未執行的 Issue 需求改變時，以新 Issue 取代，不要求 template migration。
-- 已在執行的 Issue 出現罕見重大變更時，由 human 停止 ALC／executor，再重新產生 Issue。
-- Roadmap 只更新仍然有效的現況，不保留 change log；必要歷史由 Git 或 Linear 提供。
+- Publish approved issue outcomes into the project's existing issue authority.
+- Record durable sequencing or milestone changes only in the project's existing roadmap authority.
+- Do not keep synchronized copies in a Studio-shaped file.
+- Unpublished work may be resplit during design.
+- Grandfather existing published issues and roadmaps; do not migrate them for template consistency.
+- Replace or substantively revise an existing issue only when it is not implementation-ready or new evidence invalidates its strategy.
+- For a major change during execution, stop the executor according to project policy and redesign the work; do not build a Studio restart lifecycle.

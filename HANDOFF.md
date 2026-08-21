@@ -2,43 +2,47 @@
 
 ## Current state
 
-本 repository 已建立 Issue Spec Studio 的 product design baseline v0.1。內容只包含目前已確認的決策與操作準則，沒有保存 brainstorm 過程或方案比較。
+This repository contains the approved Issue Spec Studio design baseline. It stores reusable methodology, templates, operating guidance, and artifact contracts only. It contains no target-project Profile, checkpoint, issue draft, roadmap copy, or other current project state.
 
-目前尚未進入 implementation。Repository 中沒有正式 CLI、service、database、renderer、Skill 或平台發布整合。
+The repository has not entered product implementation. It has no production CLI, service, database, renderer, skill, or platform-publishing integration.
 
-## 已確定的產品形態
+## Confirmed product shape
 
-- 單人使用、local-first 的文件型 Spec Studio。
-- Discussion AI 是主要操作介面與語意推理者。
-- Markdown 是 canonical human-readable artifact。
-- Repo-level bootstrap instruction 只載入極小入口，再以 refs 按需取得其他 project context。
-- Target repo 保存治理規則與 Project Profile；Studio 不複製完整治理內容。
-- Linear 預期是主要 Issue 管理平台，但發布不屬於核心能力。
-- ALC 只是 coding-ready Issue 的下游 consumer，不影響 Studio 核心模型。
-- Studio 內部可在有重複錯誤證據後加入小型檢查 scripts，但不先建立產品級 CLI。
+- A single-user, local-first design methodology and context-routing system.
+- Design sessions run in target repositories.
+- A target repository's thin root `AGENTS.md` routes implementation intent to project instructions and design intent to Studio.
+- The target repository owns its governance, Project Profile, and any temporary active checkpoint.
+- Markdown is the canonical human-readable issue output.
+- The Profile maps stable facts and authoritative references without copying their contents.
+- An active checkpoint preserves only unresolved state needed to resume one unfinished design discussion.
+- Published issues and roadmaps remain in the target project's existing authorities.
+- ALC is one downstream consumer and does not shape the core model.
+- Small deterministic checks may be added after repeated evidence, but no product CLI is assumed.
 
-## 下一個建議工作階段
+## Recommended next validation session
 
-下一階段仍應是設計驗證，不是直接建立完整工具：
+Continue with design validation before building a complete tool:
 
-1. 依 `templates/` 建立 paper prototype。
-2. 分別走查 compact 小修改、standard 功能、大需求拆分、高風險修改。
-3. 記錄缺漏、過量 context、不可驗證 AC、過大 Issue 與清理失敗。
-4. 修訂 rules 與 templates。
-5. 通過 MVP acceptance 後才決定需要哪些最小實作。
+1. Apply the router and Profile templates to a real target repository using its existing layout.
+2. Walk through a compact change, standard feature, large-request decomposition, and high-risk change.
+3. Test whether a new discussion can resume from only the minimal active checkpoint.
+4. Confirm that publication and cleanup leave no issue or roadmap mirror behind.
+5. Record only repeated specification-quality failures, then revise guidance or templates.
+6. Decide which deterministic checks are justified after the MVP acceptance scenarios pass.
 
-## 接手限制
+## Handoff constraints
 
-- 不要把目前文件改寫成討論日誌。
-- 不要為尚未發生的 edge case 新增 framework。
-- 不要把 ALC execution lifecycle 納入本產品。
-- 不要建立與 Linear 或 target repo 重複的狀態來源。
-- 不要讓 bootstrap 或 Project Profile 演變成完整知識庫。
+- Do not turn durable Studio documents into a discussion log.
+- Do not store target-project state in this repository.
+- Do not create a second issue, roadmap, dashboard, or execution authority.
+- Do not add a framework for hypothetical edge cases.
+- Do not bring the ALC execution lifecycle into the product.
+- Do not let the root router or Project Profile become a copied knowledge base.
 
-## 尚未完成但已排定的設計驗證
+## Pending validation
 
-- 使用真實 repo 驗證 Project Profile onboarding。
-- 以真實需求測試 compact 與 standard Issue template。
-- 驗證 roadmap 拆分能否維持 bounded planning frontier。
-- 驗證長對話／新對話可否只靠乾淨 active checkpoint 恢復。
-- 收集是否真的需要 deterministic check script 的證據。
+- Validate project-native onboarding against a real repository.
+- Test compact and standard issue templates with real requests.
+- Verify that decomposition stays bounded and publishes into an existing planning authority.
+- Verify checkpoint creation, compaction, removal, and exceptional archival policy.
+- Gather evidence for or against deterministic validation scripts.
