@@ -35,6 +35,14 @@ The canonical project-owned artifact locations are `.issue-spec/project-profile.
 6. Produce a candidate Markdown issue and run the coding-ready review.
 7. Freeze the output after human approval, publish it to the project's existing issue authority, and remove completed state from the active checkpoint.
 
+## Discussion visibility
+
+Keep the human synchronized with the current design direction during the discussion. Provide a concise design-state narrative when an initial viable direction forms, a high-impact answer changes the direction, the discussion moves into decomposition or planning, or human approval is needed.
+
+The narrative states the current direction and outcome, the important rationale or trade-off, the confirmed boundaries, and the unresolved point that matters next. Synthesize the effect of a high-impact answer before asking the next question.
+
+Do not repeat a full decision ledger every turn. This narrative is a conversational view of the current effective design, not a durable artifact, transcript, or reason to create an active checkpoint.
+
 For implementation intent, do not automatically load Studio or create a checkpoint. Read the implementation-ready issue and relevant project authorities. Return to design routing only when implementation reveals a genuine unresolved design blocker.
 
 ## Methodology routing

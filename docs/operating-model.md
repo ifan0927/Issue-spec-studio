@@ -62,6 +62,7 @@ Use the project's normal implementation workflow when an implementation-ready is
 - Detects design intent and loads only relevant project context.
 - Identifies gaps, ambiguity, conflicts, assumptions, and risk.
 - Keeps only the current effective decisions and assumptions needed for the active discussion.
+- Keeps the human synchronized with the current design direction at meaningful state changes.
 - Chooses compact or standard authoring depth.
 - Decomposes oversized work without mirroring the project roadmap.
 - Produces an implementation plan and coding-ready review.
@@ -113,6 +114,29 @@ These are reasoning stages, not a persistent state machine, and they do not requ
 - Show blockers, advisories, and the ready result to the human.
 - Freeze the issue after approval.
 - Exclude the internal validation review from the final issue.
+
+## Discussion presentation contract
+
+The discussion AI must make the effective design visible without turning the conversation into a transcript or exposing a full internal decision ledger.
+
+Present a concise current-design narrative when:
+
+- An initial viable direction has formed from the objective and repository evidence.
+- A human answer or new evidence changes scope, strategy, an important boundary, the domain model, issue decomposition, or risk treatment.
+- The discussion moves from clarification into decomposition or planning.
+- The AI recommends a direction between meaningful alternatives.
+- Human approval is required for a decision, decomposition, or candidate issue.
+
+The narrative includes only what the human needs to evaluate the direction:
+
+- **Current direction:** the proposed shape of the solution and intended outcome.
+- **Why:** the relevant evidence, confirmed decision, constraint, or trade-off supporting it.
+- **Confirmed boundaries:** what is currently included, excluded, or delegated to agent discretion.
+- **Still unresolved:** the next point that can materially change the design.
+
+After a high-impact answer, synthesize its effect on the current direction before asking the next question. Do not produce a directionless sequence of clarifying questions when enough evidence exists to explain the emerging design.
+
+Do not display this narrative on every turn when nothing material changed. It is a conversational projection of current effective state, not a durable artifact. It does not require an active checkpoint and must not be copied into one as discussion history. When a checkpoint does exist, the narrative may be derived from it, but the checkpoint remains the minimal resumable state defined by the information model.
 
 ## Lightweight lifecycle
 
